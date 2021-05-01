@@ -91,7 +91,6 @@
       if(tags[tag] < params.min){
         params.min = tags[tag];
       }
-      console.log(tag + ' is used ' + tags[tag] + ' times');
     }
     return params;
   }
@@ -154,11 +153,11 @@
     }
 
     /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector('.tags');
+    const tagList = document.querySelector(optTagsListSelector);
 
     /* [NEW] create variable for all links HTML code */
     const tagsParams = calculateTagsParams(allTags);
-    console.log('tagsParams:', tagsParams);
+
     let allTagsHTML = '';
 
     /* [NEW] START LOOP: for each tag in allTags: */
@@ -166,13 +165,12 @@
       /* [NEW] generate code of a link and add it to allTagsHTML */
       // BEFORE: allTagsHTML += tag + ' (' + allTags[tag] + ') ';
       allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a>&nbsp;</li>';
-      console.log('allTagsHTML:', allTagsHTML);
+
     /* [NEW] END LOOP: for each tag in allTags: */
     }
 
     /* [NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
-    console.log('tagList.innerHTML:', tagList.innerHTML);
   }
 
   generateTags();
@@ -253,7 +251,6 @@
 
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#author-' + articleAuthor + '">' + articleAuthor + '</a></li>';
-      console.log("linkHTML (articleAuthor):", linkHTML);
 
       /* add generated code to html variable */
       html = html + linkHTML;
@@ -281,17 +278,15 @@
     /* [NEW] START LOOP: for each author in allAuthors: */
     for(let author in allAuthors){
       /* [NEW] genertate code of a link and add it to allAuthorsHTML */
-      allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a>&nbsp;</li>';
+      allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a> ' + allAuthors[author] + '&nbsp;</li>';
     /* [NEW] END LOOP: for each author in allAuthors */
     }
 
     /* [NEW] add HTML from allAuthorsHTML to authorList */
-    authorList.innerHTML = allAuthorsHTML;
-    console.log('authorList.innerHTML:', authorList.innerHTML);
+     authorList.innerHTML = allAuthorsHTML;
   }
 
   generateAuthors();
-  console.log('generateAuthors:', generateAuthors);
 
   function authorClickHandler(event){
     /* prevent default action for this event */
